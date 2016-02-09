@@ -35,13 +35,6 @@
         "description": "Name of storage account"
       }
     },
-    "storageAccountKey": {
-      "type": "string",
-      "defaultValue": "",
-      "metadata": {
-        "description": "Access key for storage account"
-      }
-    },
     "dnsLabelPrefix": {
       "type": "string",
       "defaultValue": "[parameters('vmName')]",
@@ -251,10 +244,6 @@
         "settings": {
           "fileUris": "[split(parameters('fileUris'), ' ')]",
           "commandToExecute": "[parameters('commandToExecute')]"
-        },
-        "protectedSettings": {
-          "storageAccountName": "[parameters('storageAccountName')]",
-          "storageAccountKey": "[parameters('storageAccountKey')]"
         }
       }
     }

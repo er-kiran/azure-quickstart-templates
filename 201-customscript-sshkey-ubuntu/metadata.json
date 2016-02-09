@@ -2,6 +2,6 @@
   "itemDisplayName": "Custom Script extension on a Ubuntu VM with sshkey access",
   "description": "This template creates a Ubuntu VM and installs the CustomScript extension with SSH key-based access ",
   "summary": "This template creates a Ubuntu VM and installs the CustomScript extension with SSH key-based access ",
-  "githubUsername": "bingosummer",
+  "githubUsername": "er-kiran",
   "dateUpdated": "2016-02-09"
 }
