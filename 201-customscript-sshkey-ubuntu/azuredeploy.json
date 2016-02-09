@@ -21,6 +21,20 @@
         "description": "String passed down to the Virtual Machine."
       }
     },
+    "virtualNetworkName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Name of virtual network"
+      }
+    },
+    "storageAccountName": {
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "Name of storage account"
+      }
+    },
     "storageAccountKey": {
       "type": "string",
       "defaultValue": "",
@@ -50,7 +64,7 @@
     },
     "vmSize": {
       "type": "string",
-      "defaultValue": "Base_A0",
+      "defaultValue": "Standard_A2",
       "metadata": {
         "description": "Size of the VM"
       }
@@ -75,7 +89,6 @@
     }
   },
   "variables": {
-    "storageAccountName": "[uniquestring(resourceGroup().id)]",
     "location": "[resourceGroup().location]",
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
@@ -88,7 +101,7 @@
     "publicIPAddressName": "[concat(parameters('vmName'),'PIP')]",
     "publicIPAddressType": "Dynamic",
     "storageAccountType": "Standard_LRS",
-    "virtualNetworkName": "baseVN",
+    "virtualNetworkName": "[parameters('virtualNetworkName')]",
     "sshKeyPath": "[concat('/home/',parameters('adminUsername'),'/.ssh/authorized_keys')]",
     "vnetID": "[resourceId('Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
     "subnet1Ref": "[concat(variables('vnetID'),'/subnets/',variables('subnet1Name'))]",
@@ -97,7 +110,7 @@
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "[variables('storageAccountName')]",
+      "name": "[parameters('storageAccountName')]",
       "apiVersion": "[variables('apiVersion')]",
       "location": "[variables('location')]",
       "properties": {
@@ -169,7 +182,7 @@
       "name": "[parameters('vmName')]",
       "location": "[variables('location')]",
       "dependsOn": [
-        "[concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
+        "[concat('Microsoft.Storage/storageAccounts/', parameters('storageAccountName'))]",
         "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
       ],
       "properties": {
@@ -202,7 +215,7 @@
           "osDisk": {
             "name": "osdisk",
             "vhd": {
-              "uri": "[concat('http://',variables('storageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/', variables('osDiskName'),'.vhd')]"
+              "uri": "[concat('http://',parameters('storageAccountName'),'.blob.core.windows.net/',variables('vmStorageAccountContainerName'),'/', variables('osDiskName'),'.vhd')]"
             },
             "caching": "ReadWrite",
             "createOption": "FromImage"
@@ -218,7 +231,7 @@
         "diagnosticsProfile": {
           "bootDiagnostics": {
              "enabled": "true",
-             "storageUri": "[concat('http://',variables('storageAccountName'),'.blob.core.windows.net')]"
+             "storageUri": "[concat('http://',parameters('storageAccountName'),'.blob.core.windows.net')]"
           }
         }
       }
@@ -240,7 +253,7 @@
           "commandToExecute": "[parameters('commandToExecute')]"
         },
         "protectedSettings": {
-          "storageAccountName": "[variables('storageAccountName')]",
+          "storageAccountName": "[parameters('storageAccountName')]",
           "storageAccountKey": "[parameters('storageAccountKey')]"
         }
       }

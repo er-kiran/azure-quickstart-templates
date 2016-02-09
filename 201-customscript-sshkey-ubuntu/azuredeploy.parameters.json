@@ -2,29 +2,35 @@
   "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "adminUsername": {
-      "value": "ubuntu"
-    },
-    "sshKeyData": {
-      "value": "<SSH_KEY>"
+    "vmName": {
+      "value": "<VM_NAME>"
     },
     "vmSize": {
       "value": "<VM_SIZE>"
     },
-    "vmName": {
-      "value": "<VM_NAME>"
-    },
     "ubuntuOSVersion": {
       "value": "14.04.2-LTS"
+    },
+    "virtualNetworkName": {
+      "value": "<VIRTUAL_NETWORK_NAME>"
+    },
+    "adminUsername": {
+      "value": "<ADMIN_USER_NAME>"
+    },
+    "sshKeyData": {
+      "value": "<SSH_KEY>"
+    },
+    "storageAccountName": {
+      "value": "<STORAGE_ACCOUNT_NAME>"
     },
     "storageAccountKey": {
       "value": "<STORAGE_ACCOUNT_KEY>"
     },
     "fileUris": {
-      "value": "<SCRIPT_URI>"
+      "value": "[<SCRIPT1_URI> <SCRIPT2_URI> ...]"
     },
     "commandToExecute": {
-      "value": "./script.sh"
+      "value": "./script1.sh"
     }
   }
 }
