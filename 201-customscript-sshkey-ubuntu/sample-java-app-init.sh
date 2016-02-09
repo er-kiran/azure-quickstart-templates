@@ -3,7 +3,7 @@
 apt-get -y -q install software-properties-common htop
 
 # add oracle java8 repo
-add-apt-repository ppa:webupd8team/java
+add-apt-repository -y ppa:webupd8team/java
 
 sudo apt-get -yq update
 

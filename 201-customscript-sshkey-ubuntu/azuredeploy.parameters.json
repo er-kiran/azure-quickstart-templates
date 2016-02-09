@@ -23,9 +23,6 @@
     "storageAccountName": {
       "value": "<STORAGE_ACCOUNT_NAME>"
     },
-    "storageAccountKey": {
-      "value": "<STORAGE_ACCOUNT_KEY>"
-    },
     "fileUris": {
       "value": "[<SCRIPT1_URI> <SCRIPT2_URI> ...]"
     },
