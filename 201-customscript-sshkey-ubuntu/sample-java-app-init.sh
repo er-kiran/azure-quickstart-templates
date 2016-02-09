@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export DEBIAN_FRONTEND=noninteractive
+
 apt-get -y -q install software-properties-common htop
 
 # add oracle java8 repo
